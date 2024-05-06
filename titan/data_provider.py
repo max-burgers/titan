@@ -433,9 +433,6 @@ def fetch_grant(session, fqn: FQN):
         # This is likely to happen when a grant has been issued by ACCOUNTADMIN
         # and some other role with MANAGE GRANTS or OWNERSHIP. It needs to be properly
         # handled in the future.
-        print(on_type)
-        print(on)
-        print(priv)
         raise Exception(f"Found multiple grants matching {fqn}")
 
     data = grants[0]
