@@ -660,7 +660,7 @@ def fetch_schema(session, fqn: FQN):
     options = options_result_to_list(data["options"])
     show_params_result = execute(session, f"SHOW PARAMETERS IN SCHEMA {fqn}")
     params = params_result_to_dict(show_params_result)
-    tags = fetch_resource_tags(session, ResourceType.SCHEMA, fqn)
+    #tags = fetch_resource_tags(session, ResourceType.SCHEMA, fqn)
 
     return {
         "name": data["name"],
@@ -671,7 +671,7 @@ def fetch_schema(session, fqn: FQN):
         "max_data_extension_time_in_days": params.get("max_data_extension_time_in_days"),
         "default_ddl_collation": params["default_ddl_collation"],
         "comment": data["comment"] or None,
-        "tags": tags,
+        "tags": None,
     }
 
 

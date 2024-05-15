@@ -348,7 +348,7 @@ def _fetch_remote_state(session, manifest: Manifest) -> State:
     urns = set(manifest["_urns"].copy())
 
     # FIXME
-    session.cursor().execute("USE ROLE ACCOUNTADMIN")
+    session.cursor().execute("USE ROLE SECURITYADMIN")
 
     for urn_str, _data in manifest.items():
         if urn_str.startswith("_"):
@@ -723,7 +723,8 @@ class Blueprint:
             elif change.action == Action.CHANGE:
                 action_queue.append(lifecycle.update_resource(change.urn, change.delta, props))
             elif change.action == Action.REMOVE:
-                action_queue.append(lifecycle.drop_resource(change.urn, change.before))
+                raise Exception("Titan is trying to remove a resource!")
+                # action_queue.append(lifecycle.drop_resource(change.urn, change.before))
 
         for change in plan:
             props = Resource.props_for_resource_type(change.urn.resource_type, change.after)
